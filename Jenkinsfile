@@ -49,7 +49,7 @@ pipeline {
             }
         }
 
-        stage('Testcase 1: Get other user's information.') {
+        stage('Testcase 1: Get other user information.') {
     steps {
         bat """
             curl -x http://127.0.0.1:8090 ^
@@ -57,7 +57,7 @@ pipeline {
                  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjbGllbnQiLCJpYXQiOjE3NTIwNzU0ODcsImV4cCI6MTc1MjA3OTA4N30.pHh85D4foJmPvLk0pxPvPr6RySFU9MyBn4H5GRF7tgo"
         """
     }
-	stage('Testcase 2: Update other user's information.') {
+	stage('Testcase 2: Update other user information.') {
     steps {
         bat """
             curl -x http://127.0.0.1:8090 ^
@@ -118,8 +118,6 @@ stage('Check Vulnerable') {
         }
     }
 }
-
-
 
 
 }
