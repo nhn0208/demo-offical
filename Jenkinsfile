@@ -10,8 +10,8 @@ pipeline {
     stages {
         stage('Build Project') {
             steps {
-                dir('api') {
-                    bat 'mvn clean package -DskipTests'
+                dir('Identity-Service') {
+                    bat 'mvnw.cmd clean package -DskipTests'
                 }
             }
         }
