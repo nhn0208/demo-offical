@@ -11,7 +11,7 @@ pipeline {
         stage('Build Project') {
             steps {
                 dir('api') {
-                    bat 'mvnw.cmd clean package -DskipTests'
+                    bat 'mvn clean package -DskipTests'
                 }
             }
         }
