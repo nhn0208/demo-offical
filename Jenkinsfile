@@ -57,7 +57,10 @@ pipeline {
                  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjbGllbnQiLCJpYXQiOjE3NTIwNzU0ODcsImV4cCI6MTc1MjA3OTA4N30.pHh85D4foJmPvLk0pxPvPr6RySFU9MyBn4H5GRF7tgo"
         """
     }
-	stage('Testcase 2: Update other user information.') {
+
+}
+
+stage('Testcase 2: Update other user information.') {
     steps {
         bat """
             curl -x http://127.0.0.1:8090 ^
@@ -65,6 +68,7 @@ pipeline {
                  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjbGllbnQiLCJpYXQiOjE3NTIwNzU0ODcsImV4cCI6MTc1MjA3OTA4N30.pHh85D4foJmPvLk0pxPvPr6RySFU9MyBn4H5GRF7tgo"
         """
     }
+}
 	stage('Testcase 3: Update role to ADMIN by User.') {
     steps {
         bat """
@@ -73,6 +77,7 @@ pipeline {
                  -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjbGllbnQiLCJpYXQiOjE3NTIwNzU0ODcsImV4cCI6MTc1MjA3OTA4N30.pHh85D4foJmPvLk0pxPvPr6RySFU9MyBn4H5GRF7tgo"
         """
     }
+}
 	stage('Testcase 4: Register with ADMIN role.') {
     steps {
         bat """
@@ -80,9 +85,8 @@ pipeline {
                  -X POST http://127.0.0.1:8080/user/register
         """
     }
-
-
 }
+
 stage('Append log vào workspace') {
     steps {
         bat '''
@@ -119,8 +123,6 @@ stage('Check Vulnerable') {
     }
 }
 
-
-}
 	post {
     always {
         publishHTML(target: [
