@@ -78,7 +78,6 @@ pipeline {
             }
 
             def content = readFile(logPath)
-            // Tách thành các đoạn log giữa các dòng trống
             def sections = content.split(/\r?\n\r?\n+/).findAll { it.trim() }
 
             if (sections.isEmpty()) {
@@ -86,7 +85,7 @@ pipeline {
             }
 
             def latestScan = sections.last().trim()
-		echo "Log:\n" + latestScan
+		echo "Log:\n" + content
 
             if (latestScan.contains("BOLA vulnerability")) {
                 error("BOLA vulnerability detected in latest scan! Failing pipeline.")
