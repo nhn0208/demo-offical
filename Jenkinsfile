@@ -86,6 +86,7 @@ pipeline {
             }
 
             def latestScan = sections.last().trim()
+		echo "Log:\n" + latestScan
 
             if (latestScan.contains("BOLA vulnerability")) {
                 error("BOLA vulnerability detected in latest scan! Failing pipeline.")
