@@ -4,7 +4,6 @@ pipeline {
     environment {
         ZAP_HOME = 'C:\\Program Files\\ZAP\\Zed Attack Proxy'
         BACKEND_JAR = '${env.WORKSPACE}\\Identity-Service\\target\\IdentityService-0.0.1-SNAPSHOT.jar'
-        ZAP_LOG_DIR = "${env.WORKSPACE}\\zap\\zap-reports"
     }
 
     stages {
@@ -21,7 +20,7 @@ pipeline {
                 powershell """
                     Start-Process -FilePath "java" -ArgumentList "-jar ${BACKEND_JAR}" -WindowStyle Hidden
                 """
-                sleep time: 10, unit: 'SECONDS'
+                sleep time: 20, unit: 'SECONDS'
             }
         }
 
@@ -32,7 +31,7 @@ pipeline {
                         powershell -Command "Start-Process 'zap.bat' -ArgumentList '-daemon -port 8090 -config api.disablekey=true -config scripts.scriptsAutoLoad=true' -WindowStyle Hidden"
                     '''
                 }
-                sleep time: 30, unit: 'SECONDS'
+                sleep time: 20, unit: 'SECONDS'
             }
         }
 
@@ -61,8 +60,6 @@ pipeline {
         stage('Append log vào workspace') {
     steps {
         bat '''
-            if not exist "zap\\zap-reports" mkdir "zap\\zap-reports"
-            echo. >> zap\\zap-reports\\access.log
             type "C:\\Xanh\\tttn\\demo_offical\\zap\\zap-reports\\access.log" >> zap\\zap-reports\\access.log
         '''
     }
