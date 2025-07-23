@@ -21,7 +21,7 @@ pipeline {
                 powershell """
                     Start-Process -FilePath "java" -ArgumentList "-jar ${BACKEND_JAR}" -WindowStyle Hidden
                 """
-                sleep time: 10, unit: 'SECONDS'
+                sleep time: 20, unit: 'SECONDS'
             }
         }
 
