@@ -58,33 +58,44 @@ pipeline {
             }
         }
 
-        
+        stage('Append log vào workspace') {
+    steps {
+        bat '''
+            if not exist "zap\\zap-reports" mkdir "zap\\zap-reports"
+            echo. >> zap\\zap-reports\\access.log
+            type "C:\\Xanh\\tttn\\demo_offical\\zap\\zap-reports\\access.log" >> zap\\zap-reports\\access.log
+        '''
+    }
+}
+
 
         stage('Check Vulnerable') {
-            steps {
-                script {
-                    def logPath = "zap/zap-reports/access.log"
-                    if (!fileExists(logPath)) {
-                        error("Log file not found: ${logPath}")
-                    }
+    steps {
+        script {
+            def logPath = "zap/zap-reports/access.log"
+            if (!fileExists(logPath)) {
+                error("Log file not found: ${logPath}")
+            }
 
-                    def content = readFile(logPath)
-                    def sections = content.split(/\r?\n\r?\n+/).findAll { it.trim() }
+            def content = readFile(logPath)
+            // Tách thành các đoạn log giữa các dòng trống
+            def sections = content.split(/\r?\n\r?\n+/).findAll { it.trim() }
 
-                    if (sections.isEmpty()) {
-                        error("No valid scan log sections found!")
-                    }
+            if (sections.isEmpty()) {
+                error("No valid scan log sections found!")
+            }
 
-                    def latestScan = sections.last().trim()
+            def latestScan = sections.last().trim()
 
-                    if (latestScan.contains("BOLA vulnerability")) {
-                        error("Some vulnerability detected in latest scan! Failing pipeline.")
-                    } else {
-                        echo "No vulnerabilities detected in latest scan."
-                    }
-                }
+            if (latestScan.contains("BOLA vulnerability")) {
+                error("BOLA vulnerability detected in latest scan! Failing pipeline.")
+            } else {
+                echo "No BOLA vulnerabilities detected in latest scan."
             }
         }
+    }
+}
+
     }
 
     post {
