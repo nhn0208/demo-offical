@@ -53,7 +53,7 @@ pipeline {
                 bat """
                     curl -x http://127.0.0.1:8090 ^
                          -X GET http://127.0.0.1:8080/user/getById/2 ^
-                         -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjbGllbnQiLCJpYXQiOjE3NTIwNzU0ODcsImV4cCI6MTc1MjA3OTA4N30.pHh85D4foJmPvLk0pxPvPr6RySFU9MyBn4H5GRF7tgo"
+                         -H "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsInNjb3BlIjoiUk9MRV9VU0VSIiwiaXNzIjoiY29tLmV4YW1wbGUiLCJleHAiOjE3NTMyNjE4NzksImlhdCI6MTc1MzI1ODI3OSwidXNlcklkIjoyLCJqdGkiOiI3YmUzMTA0Mi0zOGI0LTQ1MjYtODU2Yi0wZTI4NTgxMWI4OGUifQ.Vb5Bbcdz1xO5Vkmfc7ZRuahrWXFxigiwPdNefrY6BvadLi5T6NF7zPL8rWc2nqt0OgDWmtSoWJV4wHASiQTWFQ"
                 """
             }
         }
@@ -63,7 +63,7 @@ pipeline {
                 bat """
                     curl -x http://127.0.0.1:8090 ^
                          -X PUT http://127.0.0.1:8080/user/update/user2 ^
-                         -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjbGllbnQiLCJpYXQiOjE3NTIwNzU0ODcsImV4cCI6MTc1MjA3OTA4N30.pHh85D4foJmPvLk0pxPvPr6RySFU9MyBn4H5GRF7tgo"
+                         -H "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsInNjb3BlIjoiUk9MRV9VU0VSIiwiaXNzIjoiY29tLmV4YW1wbGUiLCJleHAiOjE3NTMyNjE4NzksImlhdCI6MTc1MzI1ODI3OSwidXNlcklkIjoyLCJqdGkiOiI3YmUzMTA0Mi0zOGI0LTQ1MjYtODU2Yi0wZTI4NTgxMWI4OGUifQ.Vb5Bbcdz1xO5Vkmfc7ZRuahrWXFxigiwPdNefrY6BvadLi5T6NF7zPL8rWc2nqt0OgDWmtSoWJV4wHASiQTWFQ"
                 """
             }
         }
@@ -73,7 +73,7 @@ pipeline {
                 bat """
                     curl -x http://127.0.0.1:8090 ^
                          -X PUT http://127.0.0.1:8080/user/update/user3 ^
-                         -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjbGllbnQiLCJpYXQiOjE3NTIwNzU0ODcsImV4cCI6MTc1MjA3OTA4N30.pHh85D4foJmPvLk0pxPvPr6RySFU9MyBn4H5GRF7tgo"
+                         -H "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsInNjb3BlIjoiUk9MRV9VU0VSIiwiaXNzIjoiY29tLmV4YW1wbGUiLCJleHAiOjE3NTMyNjE4NzksImlhdCI6MTc1MzI1ODI3OSwidXNlcklkIjoyLCJqdGkiOiI3YmUzMTA0Mi0zOGI0LTQ1MjYtODU2Yi0wZTI4NTgxMWI4OGUifQ.Vb5Bbcdz1xO5Vkmfc7ZRuahrWXFxigiwPdNefrY6BvadLi5T6NF7zPL8rWc2nqt0OgDWmtSoWJV4wHASiQTWFQ"
                 """
             }
         }
