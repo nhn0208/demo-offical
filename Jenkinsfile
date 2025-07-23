@@ -43,7 +43,7 @@ pipeline {
                     netstat -ano | findstr :8090 || echo ZAP proxy not listening on port 8090!
 
                     echo === Checking if Backend API (port 8080) is running ===
-                    netstat -ano | findstr LISTENING || echo Backend API not listening on port 8080!
+                    netstat -ano | findstr :8080 || echo Backend API not listening on port 8080!
                 '''
             }
         }
