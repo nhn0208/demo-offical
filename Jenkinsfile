@@ -127,8 +127,8 @@ pipeline {
         always {
             publishHTML(target: [
                 reportDir: "zap\\zap-reports",
-                reportFiles: "zap-bola-log.txt",
-                reportName: 'ZAP BOLA Report'
+                reportFiles: "access.log",
+                reportName: 'Report'
             ])
         }
     }
