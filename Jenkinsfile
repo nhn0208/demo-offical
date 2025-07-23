@@ -16,20 +16,14 @@ pipeline {
             }
         }
 
-       stage('Start Backend API') {
-    steps {
-        bat '''
-            start /b java -jar api\\target\\api-0.0.1-SNAPSHOT.jar > zap\\backend-log.txt 2>&1
-        '''
-        sleep time: 10, unit: 'SECONDS'
-    }
-}
-stage('Backend Log Debug') {
-    steps {
-        bat 'type zap\\backend-log.txt'
-    }
-}
-
+        stage('Start Backend API') {
+            steps {
+                powershell """
+                    Start-Process -FilePath "java" -ArgumentList "-jar ${BACKEND_JAR}" -WindowStyle Hidden
+                """
+                sleep time: 30, unit: 'SECONDS'
+            }
+        }
 
         stage('Start ZAP Proxy') {
             steps {
