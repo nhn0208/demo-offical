@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         ZAP_HOME = 'C:\\Program Files\\ZAP\\Zed Attack Proxy'
-        BACKEND_JAR = '${env.WORKSPACE}\\Identity-Service\\target\\IdentityService-0.0.1-SNAPSHOT.jar'
+        BACKEND_JAR = 'Identity-Service\\target\\IdentityService-0.0.1-SNAPSHOT.jar'
     }
 
     stages {
@@ -18,8 +18,7 @@ pipeline {
         stage('Start Backend API') {
     steps {
         powershell """
-            Write-Host "Starting backend from: ${BACKEND_JAR}"
-            Start-Process -FilePath "java" -ArgumentList "-jar ${BACKEND_JAR}" -WindowStyle Hidden
+            java -jar ${BACKEND_JAR}
         """
         sleep time: 20, unit: 'SECONDS'
     }
