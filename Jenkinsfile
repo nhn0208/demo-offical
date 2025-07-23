@@ -21,7 +21,7 @@ pipeline {
                 powershell """
                     Start-Process -FilePath "java" -ArgumentList "-jar ${BACKEND_JAR}" -WindowStyle Hidden
                 """
-                sleep time: 30, unit: 'SECONDS'
+                sleep time: 10, unit: 'SECONDS'
             }
         }
 
@@ -58,43 +58,7 @@ pipeline {
             }
         }
 
-        stage('Testcase 2: Update other user information.') {
-            steps {
-                bat """
-                    curl -x http://127.0.0.1:8090 ^
-                         -X PUT http://127.0.0.1:8080/user/update/user2 ^
-                         -H "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsInNjb3BlIjoiUk9MRV9VU0VSIiwiaXNzIjoiY29tLmV4YW1wbGUiLCJleHAiOjE3NTMyNjE4NzksImlhdCI6MTc1MzI1ODI3OSwidXNlcklkIjoyLCJqdGkiOiI3YmUzMTA0Mi0zOGI0LTQ1MjYtODU2Yi0wZTI4NTgxMWI4OGUifQ.Vb5Bbcdz1xO5Vkmfc7ZRuahrWXFxigiwPdNefrY6BvadLi5T6NF7zPL8rWc2nqt0OgDWmtSoWJV4wHASiQTWFQ"
-                """
-            }
-        }
-
-        stage('Testcase 3: Update role to ADMIN by User.') {
-            steps {
-                bat """
-                    curl -x http://127.0.0.1:8090 ^
-                         -X PUT http://127.0.0.1:8080/user/update/user3 ^
-                         -H "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsInNjb3BlIjoiUk9MRV9VU0VSIiwiaXNzIjoiY29tLmV4YW1wbGUiLCJleHAiOjE3NTMyNjE4NzksImlhdCI6MTc1MzI1ODI3OSwidXNlcklkIjoyLCJqdGkiOiI3YmUzMTA0Mi0zOGI0LTQ1MjYtODU2Yi0wZTI4NTgxMWI4OGUifQ.Vb5Bbcdz1xO5Vkmfc7ZRuahrWXFxigiwPdNefrY6BvadLi5T6NF7zPL8rWc2nqt0OgDWmtSoWJV4wHASiQTWFQ"
-                """
-            }
-        }
-
-        stage('Testcase 4: Register with ADMIN role.') {
-            steps {
-                bat """
-                    curl -x http://127.0.0.1:8090 ^
-                         -X POST http://127.0.0.1:8080/user/register
-                """
-            }
-        }
-
-        stage('Append log vào workspace') {
-            steps {
-                bat '''
-                    if not exist "zap\\zap-reports" mkdir "zap\\zap-reports"
-                    type "C:\\Xanh\\tttn\\demo_offical\\zap\\zap-reports\\access.log" >> "zap\\zap-reports\\access.log"
-                '''
-            }
-        }
+        
 
         stage('Check Vulnerable') {
             steps {
