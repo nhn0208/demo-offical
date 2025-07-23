@@ -17,9 +17,9 @@ pipeline {
 
         stage('Start Backend API') {
             steps {
-                powershell """
-                    Start-Process -FilePath "java" -ArgumentList "-jar" -WindowStyle Hidden
-                """
+                bat '''
+                   powershell -Command "Start-Process -FilePath 'java' -ArgumentList '-jar' -WindowStyle Hidden"
+                '''
                 sleep time: 10, unit: 'SECONDS'
             }
         }
