@@ -16,13 +16,14 @@ pipeline {
         }
 
         stage('Start Backend API') {
-            steps {
-                powershell """
-                    Start-Process -FilePath "java" -ArgumentList "-jar \\"Identity-Service\\\\target\\\\IdentityService-0.0.1-SNAPSHOT.jar\\" -WindowStyle Hidden
-                """
-                sleep time: 10, unit: 'SECONDS'
-            }
-        }
+    steps {
+        powershell """
+            Start-Process -FilePath "java" -ArgumentList "-jar \\"Identity-Service\\\\target\\\\IdentityService-0.0.1-SNAPSHOT.jar\\"" -WindowStyle Hidden
+        """
+        sleep time: 10, unit: 'SECONDS'
+    }
+}
+
 
         stage('Start ZAP Proxy') {
             steps {
