@@ -78,16 +78,9 @@ pipeline {
             }
 
             def content = readFile(logPath)
-            def sections = content.split(/\r?\n\r?\n+/).findAll { it.trim() }
-
-            if (sections.isEmpty()) {
-                error("No valid scan log sections found!")
-            }
-
-            def latestScan = sections.last().trim()
 		echo "Log:\n" + content
 
-            if (latestScan.contains("BOLA vulnerability")) {
+            if (content.contains("BOLA vulnerability")) {
                 error("BOLA vulnerability detected in latest scan! Failing pipeline.")
             } else {
                 echo "No BOLA vulnerabilities detected in latest scan."
