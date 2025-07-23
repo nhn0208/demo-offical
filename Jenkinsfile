@@ -16,13 +16,15 @@ pipeline {
         }
 
         stage('Start Backend API') {
-            steps {
-                powershell """
-                    Start-Process -FilePath "java" -ArgumentList "-jar ${BACKEND_JAR}"
-                """
-                sleep time: 10, unit: 'SECONDS'
-            }
-        }
+    steps {
+        powershell """
+            Write-Host "Starting backend from: ${BACKEND_JAR}"
+            Start-Process -FilePath "java" -ArgumentList "-jar ${BACKEND_JAR}" -WindowStyle Hidden
+        """
+        sleep time: 20, unit: 'SECONDS'
+    }
+}
+
 
         stage('Start ZAP Proxy') {
             steps {
