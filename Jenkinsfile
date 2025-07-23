@@ -17,9 +17,9 @@ pipeline {
 
         stage('Start Backend API') {
             steps {
-                bat '''
-                   powershell -Command "Start-Process -FilePath 'java' -ArgumentList '-jar' -WindowStyle Hidden"
-                '''
+                powershell """
+                    Start-Process -FilePath "java" -ArgumentList "-jar \\"Identity-Service\\\\target\\\\IdentityService-0.0.1-SNAPSHOT.jar\\" -WindowStyle Hidden
+                """
                 sleep time: 10, unit: 'SECONDS'
             }
         }
