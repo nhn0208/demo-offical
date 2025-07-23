@@ -32,7 +32,7 @@ pipeline {
                         powershell -Command "Start-Process 'zap.bat' -ArgumentList '-daemon -port 8090 -config api.disablekey=true -config scripts.scriptsAutoLoad=true' -WindowStyle Hidden"
                     '''
                 }
-                sleep time: 10, unit: 'SECONDS'
+                sleep time: 30, unit: 'SECONDS'
             }
         }
 

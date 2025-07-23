@@ -1,0 +1,5 @@
+[2025-07-23 16:39:24] [!!] BOLA vulnerability found at: http://127.0.0.1:8080/user/getById/1
+[2025-07-23 16:39:24] [!!] BOLA vulnerability found at: http://127.0.0.1:8080/user/getById/3
+[2025-07-23 16:39:24] [!!] BOLA vulnerability found at: http://127.0.0.1:8080/user/getById/4
+[2025-07-23 16:39:24] [!!] BOLA vulnerability found at: http://127.0.0.1:8080/user/getById/5
+[2025-07-23 16:39:24] [!!] BOLA vulnerability found at: http://127.0.0.1:8080/user/getById/6
