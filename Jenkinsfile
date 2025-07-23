@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         ZAP_HOME = 'C:\\Program Files\\ZAP\\Zed Attack Proxy'
-        BACKEND_JAR = 'api\\target\\api-0.0.1-SNAPSHOT.jar'
+        BACKEND_JAR = 'Identity-Service\\target\\IdentityService-0.0.1-SNAPSHOT.jar'
         ZAP_LOG_DIR = "${env.WORKSPACE}\\zap\\zap-reports"
     }
 
