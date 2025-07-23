@@ -52,8 +52,7 @@ pipeline {
             steps {
                 bat """
                     curl -x http://127.0.0.1:8090 ^
-                         -X GET http://127.0.0.1:8080/user/getById/2 ^
-                         -H "Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ1c2VyMSIsInNjb3BlIjoiUk9MRV9VU0VSIiwiaXNzIjoiY29tLmV4YW1wbGUiLCJleHAiOjE3NTMyNjE4NzksImlhdCI6MTc1MzI1ODI3OSwidXNlcklkIjoyLCJqdGkiOiI3YmUzMTA0Mi0zOGI0LTQ1MjYtODU2Yi0wZTI4NTgxMWI4OGUifQ.Vb5Bbcdz1xO5Vkmfc7ZRuahrWXFxigiwPdNefrY6BvadLi5T6NF7zPL8rWc2nqt0OgDWmtSoWJV4wHASiQTWFQ"
+                         -X GET http://127.0.0.1:8080/user/getById/2
                 """
             }
         }
