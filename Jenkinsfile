@@ -3,7 +3,6 @@ pipeline {
 
     environment {
         ZAP_HOME = 'C:\\Program Files\\ZAP\\Zed Attack Proxy'
-        BACKEND_JAR = 'api\\target\\api-0.0.1-SNAPSHOT.jar'
         ZAP_LOG_DIR = "${env.WORKSPACE}\\zap\\zap-reports"
     }
 
@@ -19,7 +18,7 @@ pipeline {
         stage('Start Backend API') {
             steps {
                 powershell """
-                    Start-Process -FilePath "java" -ArgumentList "-jar ${BACKEND_JAR}" -WindowStyle Hidden
+                    Start-Process -FilePath "java" -ArgumentList "-jar" -WindowStyle Hidden
                 """
                 sleep time: 10, unit: 'SECONDS'
             }
