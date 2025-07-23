@@ -21,7 +21,7 @@ pipeline {
                 powershell """
                     Start-Process -FilePath "java" -ArgumentList "-jar ${BACKEND_JAR}" -WindowStyle Hidden
                 """
-                sleep time: 20, unit: 'SECONDS'
+                sleep time: 10, unit: 'SECONDS'
             }
         }
 
@@ -32,7 +32,7 @@ pipeline {
                         powershell -Command "Start-Process 'zap.bat' -ArgumentList '-daemon -port 8090 -config api.disablekey=true -config scripts.scriptsAutoLoad=true' -WindowStyle Hidden"
                     '''
                 }
-                sleep time: 15, unit: 'SECONDS'
+                sleep time: 10, unit: 'SECONDS'
             }
         }
 
