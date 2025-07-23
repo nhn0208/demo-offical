@@ -52,41 +52,41 @@ public class UserService {
     private InvalidatedTokenRepository invalidatedTokenRepository;
 
     //create new user                                                               (get error)
-    public UserCreationResponse createNewUser(UserCreationRequest request) {
-        if(userRepository.existsByUsername(request.getUsername())) {
-            throw new RuntimeException("Username have already existed");
-        }
-        User user = userMapper.toUser(request);
-        // encrypt password
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
-
-        if (request.getRoles() != null && !request.getRoles().isEmpty()) {
-            Set<Role> roles = request.getRoles().stream()
-                    .map(roleName -> roleRepository.findById(roleName)
-                            .orElseThrow(() -> new RuntimeException("Role not found: " + roleName)))
-                    .collect(Collectors.toSet());
-            user.setRoles(roles);
-        }
-        return  userMapper.toUserCreationResponse(userRepository.save(user));
-    }
-
-    //create new user                                                               (Fixed)
 //    public UserCreationResponse createNewUser(UserCreationRequest request) {
 //        if(userRepository.existsByUsername(request.getUsername())) {
-//            throw new RuntimeException("Username is existed");
+//            throw new RuntimeException("Username have already existed");
 //        }
 //        User user = userMapper.toUser(request);
 //        // encrypt password
 //        user.setPassword(passwordEncoder.encode(request.getPassword()));
 //
-//        // set default role: USER
-//        Role userRole = roleRepository.findById(Roles.USER.name())
-//                .orElseThrow(() -> new RuntimeException("Default role USER not found"));
-//        Set<Role> roles = new HashSet<>();
-//        roles.add(userRole);
-//        user.setRoles(roles);
+//        if (request.getRoles() != null && !request.getRoles().isEmpty()) {
+//            Set<Role> roles = request.getRoles().stream()
+//                    .map(roleName -> roleRepository.findById(roleName)
+//                            .orElseThrow(() -> new RuntimeException("Role not found: " + roleName)))
+//                    .collect(Collectors.toSet());
+//            user.setRoles(roles);
+//        }
 //        return  userMapper.toUserCreationResponse(userRepository.save(user));
 //    }
+
+    //create new user                                                               (Fixed)
+    public UserCreationResponse createNewUser(UserCreationRequest request) {
+        if(userRepository.existsByUsername(request.getUsername())) {
+            throw new RuntimeException("Username is existed");
+        }
+        User user = userMapper.toUser(request);
+        // encrypt password
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+
+        // set default role: USER
+        Role userRole = roleRepository.findById(Roles.USER.name())
+                .orElseThrow(() -> new RuntimeException("Default role USER not found"));
+        Set<Role> roles = new HashSet<>();
+        roles.add(userRole);
+        user.setRoles(roles);
+        return  userMapper.toUserCreationResponse(userRepository.save(user));
+    }
 
     //get all users
     @PreAuthorize("hasRole('ADMIN')")

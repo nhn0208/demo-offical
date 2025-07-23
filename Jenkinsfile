@@ -52,7 +52,7 @@ pipeline {
             steps {
                 bat """
                     curl -x http://127.0.0.1:8090 ^
-                         -X GET http://127.0.0.1:8080/user/2 ^
+                         -X GET http://127.0.0.1:8080/user/getById/2 ^
                          -H "Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJjbGllbnQiLCJpYXQiOjE3NTIwNzU0ODcsImV4cCI6MTc1MjA3OTA4N30.pHh85D4foJmPvLk0pxPvPr6RySFU9MyBn4H5GRF7tgo"
                 """
             }
@@ -91,7 +91,7 @@ pipeline {
             steps {
                 bat '''
                     if not exist "zap\\zap-reports" mkdir "zap\\zap-reports"
-                    type "C:\\Xanh\\tttn\\demo\\zap\\zap-reports\\access.log" >> "zap\\zap-reports\\zap-bola-log.txt"
+                    type "C:\\Xanh\\tttn\\demo_offical\\zap\\zap-reports\\access.log" >> "zap\\zap-reports\\access.log"
                 '''
             }
         }
@@ -99,7 +99,7 @@ pipeline {
         stage('Check Vulnerable') {
             steps {
                 script {
-                    def logPath = "zap/zap-reports/zap-bola-log.txt"
+                    def logPath = "zap/zap-reports/access.log"
                     if (!fileExists(logPath)) {
                         error("Log file not found: ${logPath}")
                     }

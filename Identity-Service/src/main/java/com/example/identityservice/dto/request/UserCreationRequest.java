@@ -18,5 +18,5 @@ public class UserCreationRequest {
     @Size(min = 8, message = "Password must be at least 8 characters!")
     private String password;
     private String email;
-    private List<String> roles;         //gây lỗi (sửa -> comment)
+//    private List<String> roles;         //gây lỗi (sửa -> comment)
 }
