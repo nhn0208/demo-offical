@@ -87,7 +87,7 @@ pipeline {
         stage('Append log vào workspace') {
     steps {
         bat '''
-            copy /Y "C:\\Xanh\\tttn\\demo_offical\\zap\\zap-reports\\access.log" >> zap\\zap-reports\\access.log
+            copy /Y "C:\\Xanh\\tttn\\demo_offical\\zap\\zap-reports\\access.log" "zap\\zap-reports\\access.log"
         '''
     }
 }
@@ -109,15 +109,21 @@ pipeline {
             } else {
                 echo "No BOLA vulnerabilities detected in latest scan."
             }
-		if (content.contains("BOPLA vulnerability")) {
+		if (content.contains("Sent forged PUT ")) {
                 error("BOLA vulnerability detected in scan! Failing pipeline.")
             } else {
                 echo "No BOLA vulnerabilities detected in latest scan."
             }
-		if (content.contains("Accessed /user/all with forged role")) {
-                error("BOLA vulnerability detected in scan! Failing pipeline.")
+
+		if (content.contains("BOPLA vulnerability")) {
+                error("BOPLA vulnerability detected in scan! Failing pipeline.")
             } else {
-                echo "No BOLA vulnerabilities detected in latest scan."
+                echo "No BOPLA vulnerabilities detected in latest scan."
+            }
+		if (content.contains("Accessed /user/all with forged role")) {
+                error("BOPLA vulnerability detected in scan! Failing pipeline.")
+            } else {
+                echo "No BOPLA vulnerabilities detected in latest scan."
             }
         }
     }
