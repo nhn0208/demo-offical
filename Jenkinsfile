@@ -110,9 +110,9 @@ pipeline {
                 echo "No BOLA vulnerabilities detected in latest scan."
             }
 		if (content.contains("BOPLA vulnerability found! Roles")) {
-                error("BOLA vulnerability detected in scan! Failing pipeline.")
+                error("BOPLA vulnerability detected in scan! Failing pipeline.")
             } else {
-                echo "No BOLA vulnerabilities detected in latest scan."
+                echo "No BOPLA vulnerabilities detected in latest scan."
             }
 
 		if (content.contains("BOPLA vulnerability")) {
