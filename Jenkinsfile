@@ -109,7 +109,7 @@ pipeline {
             } else {
                 echo "No BOLA vulnerabilities detected in latest scan."
             }
-		if (content.contains("Sent forged PUT ")) {
+		if (content.contains("BOPLA vulnerability found! Roles")) {
                 error("BOLA vulnerability detected in scan! Failing pipeline.")
             } else {
                 echo "No BOLA vulnerabilities detected in latest scan."
