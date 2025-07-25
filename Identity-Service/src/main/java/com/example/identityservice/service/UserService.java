@@ -96,27 +96,27 @@ public class UserService {
     }
 
     //get user by userId                                                       (get error)
-    public User getUserById(long id) {
-        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("User not found"));
-        return user;
-    }
-
-    //get user by userId                                                        (fixed)
-//    @PostAuthorize("returnObject.userId == principal.getClaim('userId')")
 //    public User getUserById(long id) {
-//        //sửa lỗi từ đây
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        Jwt jwt = (Jwt) authentication.getPrincipal();
-//        Long userId = jwt.getClaim("userId");
-//
-//        // Kiểm tra userId có trùng với id được yêu cầu không
-//        if (!userId.equals(id)) {
-//            throw new ForbiddenException("You're not allow to access this user information");
-//        }// đến đây
-//
 //        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("User not found"));
 //        return user;
 //    }
+
+    //get user by userId                                                        (fixed)
+    @PostAuthorize("returnObject.userId == principal.getClaim('userId')")
+    public User getUserById(long id) {
+        //sửa lỗi từ đây
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        Jwt jwt = (Jwt) authentication.getPrincipal();
+        Long userId = jwt.getClaim("userId");
+
+        // Kiểm tra userId có trùng với id được yêu cầu không
+        if (!userId.equals(id)) {
+            throw new ForbiddenException("You're not allow to access this user information");
+        }// đến đây
+
+        User user = userRepository.findById(id).orElseThrow(() -> new NotFoundException("User not found"));
+        return user;
+    }
 
     //get user by username
     @PostAuthorize("returnObject.username == authentication.name")
@@ -127,28 +127,28 @@ public class UserService {
 
     // User update theirs own info by username                                      (get error)
 //    @PostAuthorize("returnObject.username == authentication.name")
-    public UserResponse updateUser(UserUpdateRequest request, String username) {
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new NotFoundException("User not found"));
-        //update user
-        userMapper.updateUser(user,request);
-        //encrypt updated password
-        user.setPassword(passwordEncoder.encode(request.getPassword()));
-
-        var roles = roleRepository.findAllById(request.getRoles());
-        user.setRoles(new HashSet<>(roles));
-        return  userMapper.toUserResponse(userRepository.save(user));
-    }
-
-    // User update theirs own info by username (fixed)
-//    @PostAuthorize("returnObject.username == authentication.name")
-//    public UserUpdateResponse updateUser(UserUpdateRequest request, String username) {
+//    public UserResponse updateUser(UserUpdateRequest request, String username) {
 //        User user = userRepository.findByUsername(username).orElseThrow(() -> new NotFoundException("User not found"));
 //        //update user
 //        userMapper.updateUser(user,request);
 //        //encrypt updated password
 //        user.setPassword(passwordEncoder.encode(request.getPassword()));
-//        return  userMapper.toUserUpdateResponse(userRepository.save(user));
+//
+//        var roles = roleRepository.findAllById(request.getRoles());
+//        user.setRoles(new HashSet<>(roles));
+//        return  userMapper.toUserResponse(userRepository.save(user));
 //    }
+
+    // User update theirs own info by username (fixed)
+    @PostAuthorize("returnObject.username == authentication.name")
+    public UserUpdateResponse updateUser(UserUpdateRequest request, String username) {
+        User user = userRepository.findByUsername(username).orElseThrow(() -> new NotFoundException("User not found"));
+        //update user
+        userMapper.updateUser(user,request);
+        //encrypt updated password
+        user.setPassword(passwordEncoder.encode(request.getPassword()));
+        return  userMapper.toUserUpdateResponse(userRepository.save(user));
+    }
 
     // admin update user role
     @PreAuthorize("hasRole('ADMIN')")
